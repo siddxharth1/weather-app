@@ -1,0 +1,29 @@
+.weather-main{
+    background: rgba(255, 255, 255, 0.037);
+    color: var(--body_color);
+    width: 88%;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+}
+
+.heading{
+    display: flex;
+    justify-content: space-between;
+}
+.greating{
+    font-size: 24px;
+    font-weight: 600;
+}
+.weather-info{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    /* padding: 10px 30px; */
+}

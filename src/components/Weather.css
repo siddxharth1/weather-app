@@ -1,0 +1,106 @@
+.main-weather {
+    background: rgba(255, 255, 255, 0.053);
+    /* background-image: url('./images/backgound.webp'); */
+    background-size:cover;
+    background-repeat: no-repeat;
+    border-radius: 14px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    /* backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px); */
+    border: 2px solid rgb(255, 255, 255);
+    padding: 0px;
+    width: 600px;
+    margin: auto;
+    margin-bottom: 30px;
+    /* filter: brightness(0.8); */
+    transition: 0.2s ease-out;
+}
+i{
+    font-size: 20px;
+}
+.blur{
+    margin: 0;
+    border-radius: 14px;
+    padding: 20px;
+    backdrop-filter: blur(5px) contrast(.8);
+}
+.loc-unit {
+    display: flex;
+    justify-content: space-between;
+}
+
+.location {
+    display: flex;
+    gap: 5px;
+}
+.date-time{
+    text-align: right;
+}
+.bi-geo-alt {
+    font-size: 18px;
+    -webkit-text-stroke: 0.4px;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+.weather-details{
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.temp{
+    font-size: 50px;
+    font-weight: 700;
+}
+.image{
+    height: 150px;
+    filter: brightness(1.1);
+}
+.about{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    position: relative;
+    top: -10px;
+}
+
+.more-abt-weather{
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.more-info{
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+}
+.moreinfo{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+.high-low{
+    margin: 10px auto;
+}
+.circle{
+    border: 5px dotted rgb(255, 255, 255);
+    width: 140px;
+  height:30px;
+  border-bottom: 0;
+  border-radius: 50% / 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  margin: 0 10px;
+}
+.sunrise-set{
+    margin: 10px auto;
+}
+.sun-rise-set{
+    display: flex;
+    justify-content: space-between;   
+}
