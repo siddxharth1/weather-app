@@ -1,11 +1,11 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import DataBody from './components/DataBody';
-import getWeatherData from './services/weatherService'
+import getFormattedWeatherData from './services/weatherService'
 function App() {
   
   const fetchWeatherData = async()=>{
-    const wdata = await getWeatherData("weather", {q:"delhi"})
+    const wdata = await getFormattedWeatherData({q:"delhi"})
     console.log(wdata)
   }
   fetchWeatherData()

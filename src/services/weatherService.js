@@ -1,4 +1,4 @@
-const API_KEY = "3bd80e7ef93fd3c5006de5547db8d6d7"
+const API_KEY = "c4be0c8811c9d94722b0f8cb46eb7f4e"
 const Base_URL = "https://api.openweathermap.org/data/2.5"
 
 const getWeatherData = (infoType, searchParams) =>{
@@ -26,6 +26,7 @@ const formatCurrentData =(data)=>{
 
 const getFormattedWeatherData = async (searchParams)=>{
     const formattedWeatherData = await getWeatherData('weather', searchParams).then(data=>formatCurrentData(data))
+    return formattedWeatherData;
 }
 
-export default getWeatherData;
+export default getFormattedWeatherData;
