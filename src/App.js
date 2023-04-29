@@ -2,8 +2,9 @@ import './App.css';
 import Navbar from './components/Navbar';
 import DataBody from './components/DataBody';
 import getFormattedWeatherData from './services/weatherService'
-function App() {
-  
+
+
+function App() {  
   const fetchWeatherData = async()=>{
     const wdata = await getFormattedWeatherData({q:"delhi"})
     console.log(wdata)
