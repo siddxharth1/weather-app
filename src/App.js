@@ -6,7 +6,7 @@ import getFormattedWeatherData from './services/weatherService'
 
 function App() {  
   const fetchWeatherData = async()=>{
-    const wdata = await getFormattedWeatherData({q:"delhi"})
+    const wdata = await getFormattedWeatherData({q:"surat"})
     console.log(wdata)
   }
   fetchWeatherData()

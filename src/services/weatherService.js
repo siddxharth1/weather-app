@@ -1,7 +1,9 @@
 const API_KEY = "c4be0c8811c9d94722b0f8cb46eb7f4e"
 const Base_URL = "https://api.openweathermap.org/data/2.5"
+
 const accuWeatherApiKey = 'IivKY50fPmWgbjJ3TdCRgA5ylH1YZlR2';
 const citySearchBaseURL = 'http://dataservice.accuweather.com/locations/v1/cities/search'; //for city search
+const forcastURL = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/'
 
 const getWeatherData = (infoType, searchParams) =>{
     const url = new URL(Base_URL+ "/" + infoType)
@@ -13,13 +15,16 @@ const getLocationKey = async (searchParams) => {
     const cityURL = new URL(citySearchBaseURL);
     cityURL.search = new URLSearchParams({apikey: accuWeatherApiKey, ...searchParams})
     const cityResponse = await fetch(cityURL).then((resp)=>resp.json())
-    return cityResponse[0];
+    return cityResponse[0].Key;
 }
 
-// const getForcastData = (searchParams) => {  
-//     const forcastURL = new URL()
-//     forcastURL.search = new URLSearchParams({apikey: accuWeatherApiKey, ...searchParams})
-// }
+const getForcastData = async (searchParams) => {  
+    const forcastDataURL = new URL(forcastURL+searchParams)
+    forcastDataURL.search = new URLSearchParams({apikey: accuWeatherApiKey})
+    const forcastResponse = await fetch(forcastDataURL).then((resp)=>resp.json())
+    // console.log(forcastResponse)
+    return forcastResponse.DailyForecasts;
+}
 
 const formatCurrentData =(data)=>{
     const {
@@ -41,10 +46,13 @@ const formatCurrentData =(data)=>{
 const getFormattedWeatherData = async (searchParams)=>{
     const formattedWeatherData = await getWeatherData('weather', searchParams).then(data=>formatCurrentData(data));
     // const {lat, lon} = formatCurrentData;
-    const locationKey = await getLocationKey(searchParams).then(locKey => locKey.Key)
-    // const locationKey = await getLocationKey(searchParams).then(locKey => {return getForcastData(locKey.key)})
-    console.log(locationKey)
+
+
+    const locationKey = await getLocationKey(searchParams).then(locKey => locKey)
+    const forcastData = await getLocationKey(searchParams).then(getForcast => {return getForcastData(locationKey)})
     
+    console.log(forcastData)
+    // console.log(locationKey)
     return formattedWeatherData;
 }
 
