@@ -32,12 +32,12 @@ const getLocationKey = async (searchParams) => {
 
     function getIdZone(data) {
         const { Key, TimeZone: { Name } } = data
-        console.log(Key, Name)
+        // console.log(Key, Name)
         return { Key, Name }
     }
-
-    getIdZone(cityRequired)
-    return cityResponse[0].Key;
+    const keyName = getIdZone(cityRequired)
+    // console.log(keyName)
+    return keyName;
 }
 
 const getDailyForcastData = async (searchParams) => {
@@ -77,9 +77,11 @@ const getFormattedWeatherData = async (searchParams) => {
     // const {lat, lon} = formatCurrentData;
 
 
-    const locationKey = await getLocationKey(searchParams).then(locKey => locKey)
-    const dailyForcastData = await getDailyForcastData(locationKey)
-    const hourlyForcastData = await getHourlyForcastData(locationKey)
+    // const locationKey = await getLocationKey(searchParams).then(locKey => locKey)
+    const locationKey = await getLocationKey(searchParams)
+    console.log(locationKey)
+    const dailyForcastData = await getDailyForcastData(locationKey.Key)
+    const hourlyForcastData = await getHourlyForcastData(locationKey.Key)
     
     // const date_time = await getTime(searchParams.q)
     // console.log(date_time)
@@ -88,7 +90,7 @@ const getFormattedWeatherData = async (searchParams) => {
     console.log(hourlyForcastData)
     
 
-    // console.log(locationKey)
+    
     return formattedWeatherData;
 }
 
