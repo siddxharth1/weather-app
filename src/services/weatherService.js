@@ -34,14 +34,14 @@ const getLocationKey = async (searchParams) => {
     const cityResponse = await fetch(cityURL).then((resp) => resp.json())
     const cityRequired = cityResponse[0] //we will get all the city name matches our search so we will pick the first one which is most relevent and used
 
+    // console.log(cityRequired)
+
     //destructuring key and timezone
     function getIdZone(data) {
-        const { Key, TimeZone: { Name } } = data
-        // console.log(Key, Name)
-        return { Key, Name }
+        const { Key, TimeZone: { Name }, EnglishName: cityName, AdministrativeArea: { LocalizedName: stateName }, Country: { EnglishName: countryName } } = data
+        return { Key, Name, stateName, cityName, countryName }
     }
     const keyName = getIdZone(cityRequired) //storing key and name in keyName variable
-    // console.log(keyName)
     return keyName;
 }
 
@@ -93,7 +93,7 @@ const getFormattedWeatherData = async (searchParams) => {
     const hourlyForcastData = await getHourlyForcastData(locationKey.Key)
     console.log(dailyForcastData)
     console.log(hourlyForcastData)
-    
+
     const date_time = await getTime(locationKey.Name)
     console.log(date_time)
 
