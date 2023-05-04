@@ -25,7 +25,6 @@ const getTime = async (searchParams) => {
     url.search = new URLSearchParams({ apiKey: timeAPI, ...searchParams })
     const time = await fetch(url).then((resp) => resp.json());
     const timee = formatToLocalTime(time.date_time_unix, searchParams,"cccc, dd LLL yyyy' |' hh:mm:ss a")
-    console.log(timee)
     return timee 
 }
 
@@ -41,7 +40,8 @@ const getLocationKey = async (searchParams) => {
     //destructuring key and timezone
     function getIdZone(data) {
         const { Key, TimeZone: { Name }, EnglishName: cityName, AdministrativeArea: { LocalizedName: stateName }, Country: { EnglishName: countryName } } = data
-        return { Key, Name, cityName, stateName, countryName }
+        const location = cityName +', ' + stateName+ ', ' + countryName
+        return { Key, Name, location}
     }
     const keyName = getIdZone(cityRequired) //storing Key, timeZone as Name, cityName, countryName, stateName in keyName variable
     return keyName;
@@ -60,26 +60,23 @@ const getWeatherData = (infoType, searchParams) => {
 //formatting(destructuring) all the current data and returning all the required data as an object
 const formatCurrentData = (data) => {
     const {
-        coord: { lat, lon },
         main: { temp, feels_like, temp_min, temp_max, pressure, humidity },
-        name,
         weather,
         wind: { speed },
-        dt,
-        sys: { country, sunrise, sunset },
+        sys: { sunrise, sunset },
         cod
     } = data
 
     const { main: weatherDesc, icon } = weather[0]
 
-    return { lat, lon, temp, feels_like, temp_min, temp_max, pressure, humidity, name, speed, dt, country, sunrise, sunset, cod, weatherDesc, icon }
+    return { temp, feels_like, temp_min, temp_max, pressure, humidity, speed, sunrise, sunset, cod, weatherDesc, icon }
 }
 
 
 //returning daily forcast data
-const getDailyForcastData = async (searchParams) => {
+const getDailyForcastData = async (searchParams, units) => {
     const dailyForcastDataURL = new URL(dailyForcastURL + searchParams.Key)
-    dailyForcastDataURL.search = new URLSearchParams({ apikey: accuWeatherApiKey, metric: true })
+    dailyForcastDataURL.search = new URLSearchParams({ apikey: accuWeatherApiKey, metric: units==='metric'? true : false })
     const forcastResponse = await fetch(dailyForcastDataURL).then((resp) => resp.json())
     let dailyData = forcastResponse.DailyForecasts
 
@@ -101,9 +98,9 @@ const getDailyForcastData = async (searchParams) => {
 }
 
 //returning hourly forcast data
-const getHourlyForcastData = async (searchParams) => {
+const getHourlyForcastData = async (searchParams, units) => {
     const hourlyForcastDataURL = new URL(hourlyForcastURL + searchParams.Key)
-    hourlyForcastDataURL.search = new URLSearchParams({ apikey: accuWeatherApiKey, metric: true })
+    hourlyForcastDataURL.search = new URLSearchParams({ apikey: accuWeatherApiKey, metric: units==='metric'? true : false })
     let hourlyForcastResponse = await fetch(hourlyForcastDataURL).then((resp) => resp.json())
     // console.log(hourlyForcastResponse);
 
@@ -134,20 +131,20 @@ const getHourlyForcastData = async (searchParams) => {
 const getFormattedWeatherData = async (searchParams) => {
     const formattedWeatherData = await getWeatherData('weather', searchParams).then(data => formatCurrentData(data));
 
-    const locationKey = await getLocationKey(searchParams)
-    // console.log(locationKey)
+    const locationInfo = await getLocationKey(searchParams)
+    console.log(locationInfo)
 
-    const dailyForcastData = await getDailyForcastData(locationKey)
-    const hourlyForcastData = await getHourlyForcastData(locationKey)
+    const dailyForcastData = await getDailyForcastData(locationInfo, searchParams.units)
+    const hourlyForcastData = await getHourlyForcastData(locationInfo, searchParams.units)
     // console.log(dailyForcastData)
     // console.log(hourlyForcastData)
 
-    const date_time = await getTime(locationKey.Name)
+    const date_time = await getTime(locationInfo.Name)
     // console.log(date_time)
-    const finalData = {daily:{...dailyForcastData}, hourly:{...hourlyForcastData}, date_time, locInfo: {...locationKey}, currentData:{...formattedWeatherData}}
-    console.log(finalData)
+    const finalData = {daily:{...dailyForcastData}, hourly:{...hourlyForcastData}, date_time, locInfo: {...locationInfo}, currentData:{...formattedWeatherData}}
+    // console.log(finalData)
 
-    return formattedWeatherData;
+    return finalData;
 }
 
 
