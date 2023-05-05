@@ -24,9 +24,10 @@ const getTime = async (searchParams) => {
     const url = new URL(timeBaseURL);
     url.search = new URLSearchParams({ apiKey: timeAPI, ...searchParams })
     const time = await fetch(url).then((resp) => resp.json());
-    console.log(time)
-    const timee = formatToLocalTime(time.date_time_unix, searchParams,"cccc, dd LLL yyyy' |' hh:mm:ss a")
-    return {time, timee }
+    const displayTime = formatToLocalTime(time.date_time_unix, searchParams,"cccc, dd LLL yyyy' |' hh:mm:ss a")
+    const time_hour = formatToLocalTime(time.date_time_unix, searchParams,'HH')
+    // return {time_24_format:time.time_24, displayTime }
+    return {time_hour, displayTime }
 }
 
 //-----------------------------------{locationKey, timezone, cityName, CountryName, StateName}---------------------
