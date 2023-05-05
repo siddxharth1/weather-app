@@ -8,28 +8,29 @@ import { useEffect, useState } from 'react';
 function App() {  
   
   const fetchWeatherData = async()=>{
-    const wdata = await getFormattedWeatherData({q:"delhi", units: 'metric' })
+    const wdata = await getFormattedWeatherData({q:"surat", units: 'metric' })
     console.log(wdata)
   }
   fetchWeatherData()
 
-  const [query, setQuery] = useState({ q: "delhi" })
+  const [query, setQuery] = useState({ q: "surat" })
   const [units, setUnits] = useState('metric')
   const [weather, setWeather] = useState(null)
 
   useEffect(() => {
-    const fetchWeatherData = async () => {
-      await getFormattedWeatherData({ query, units }).then((data)=>{
+    const fetchWeather = async () => {
+      await getFormattedWeatherData({ ...query, units }).then((data)=>{
         setWeather(data)
       })
     }
-    // fetchWeatherData({ query, units })
+    fetchWeather()
   }, [query, units])
 
   return (
     <div className='main'>
-      <Navbar/>
-      <DataBody />
+      <Navbar />
+      {weather ? <DataBody weatherData={weather}/> : <div style={{color:'white', fontSize:50, margin:'100px 40%'}}> fetching the data</div>}
+      
     </div>
   );
 }
