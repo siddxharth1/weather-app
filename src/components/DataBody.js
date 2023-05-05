@@ -10,7 +10,7 @@ function DataBody(weather) {
         <div className='greating'>
           Good Morning
         </div>
-        <div className='date-time'> Tuesday, 31 May'22 | 12:46:20 PM</div>
+        <div className='date-time'>Tuesday, 31 May'22 | 12:46:20 PM</div>
       </div>
 
       <div className='weather-info'>
