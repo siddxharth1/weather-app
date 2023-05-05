@@ -2,7 +2,8 @@ import React from 'react'
 import './DataBody.css'
 import Weather from './Weather'
 import DayWeekForcast from './DayWeekForcast'
-function DataBody() {
+
+function DataBody(weather) {
   return (
     <div className='weather-main'>
       <div className='heading'>
