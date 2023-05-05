@@ -26,6 +26,8 @@ const getTime = async (searchParams) => {
     const time = await fetch(url).then((resp) => resp.json());
     const displayTime = formatToLocalTime(time.date_time_unix, searchParams,"cccc, dd LLL yyyy' |' hh:mm:ss a")
     const time_hour = formatToLocalTime(time.date_time_unix, searchParams,'HH')
+    
+
     // return {time_24_format:time.time_24, displayTime }
     return {time_hour, displayTime }
 }
@@ -62,7 +64,7 @@ const getWeatherData = (infoType, searchParams) => {
 //formatting(destructuring) all the current data and returning all the required data as an object
 const formatCurrentData = (data) => {
     const {
-        main: { temp, feels_like, temp_min, temp_max, pressure, humidity },
+        main: {temp, feels_like, temp_min, temp_max, pressure, humidity },
         weather,
         wind: { speed },
         sys: { sunrise, sunset },
@@ -71,7 +73,7 @@ const formatCurrentData = (data) => {
 
     const { main: weatherDesc, icon } = weather[0]
 
-    return { temp, feels_like, temp_min, temp_max, pressure, humidity, speed, sunrise, sunset, cod, weatherDesc, icon }
+    return { currentTemp: Math.round(temp), real_feel: Math.round(feels_like), min_temp: Math.round(temp_min), max_temp: Math.round(temp_max), pressure, humidity, speed, sunrise, sunset, cod, weatherDesc, icon }
 }
 
 
