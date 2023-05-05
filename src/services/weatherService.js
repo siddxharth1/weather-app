@@ -132,7 +132,7 @@ const getFormattedWeatherData = async (searchParams) => {
     const formattedWeatherData = await getWeatherData('weather', searchParams).then(data => formatCurrentData(data));
 
     const locationInfo = await getLocationKey(searchParams)
-    console.log(locationInfo)
+    // console.log(locationInfo)
 
     const dailyForcastData = await getDailyForcastData(locationInfo, searchParams.units)
     const hourlyForcastData = await getHourlyForcastData(locationInfo, searchParams.units)
