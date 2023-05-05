@@ -2,13 +2,13 @@ import React from 'react'
 import HourlyForcast from './HourlyForcast'
 import DailyForcast from './DailyForcast'
 
-function DayWeekForcast() {
+function DayWeekForcast({forcastWeather}) {
   return (
     <div className='forcast-main'>
-      <HourlyForcast/>
+      <HourlyForcast hourlyForcast={forcastWeather.hourly}/>
       <br />
       <br />
-      <DailyForcast/>
+      <DailyForcast dailyForcast={forcastWeather.daily}/>
     </div>
   )
 }
