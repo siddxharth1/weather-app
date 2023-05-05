@@ -100,14 +100,14 @@
     position: absolute;
     height: 33px;
     width: 33px;
-    background: url("./images/moon-6695.svg");
+    background: url('../images/moon-6695.svg');
     background-size: cover;
     transition: 0.3s ease-in-out;
 }
 
 .dark-mode-btn:checked::before {
     content: '';
-    background: url("./images/sun-1845.svg");
+    background: url("../images/sun-1845.svg");
     background-size: cover;
     height: 33px;
     width: 33px;
