@@ -3,8 +3,6 @@ import './css/DataBody.css'
 import Weather from './Weather'
 import DayWeekForcast from './DayWeekForcast'
 
-
-
 function DataBody({weatherData}) {
   const greetingFn= ()=>{
     let hour = weatherData.date_time.time_hour

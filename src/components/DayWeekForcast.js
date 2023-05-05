@@ -2,26 +2,13 @@ import React from 'react'
 import ForcastData from './ForcastData'
 import './css/DayWeekForcast.css'
 
-function DayWeekForcast({forcastWeather}) {
+function DayWeekForcast({ forcastWeather }) {
   return (
     <div className='forcast-main'>
-      <div>
-            <div className='forcast-heading'>
-                <p>Hourly Forcast</p>
-            </div>
-            <hr />
-            <ForcastData/>
-        </div>
+      <ForcastData title={'Hourly Forcast'} ForcastData = {forcastWeather.hourly} />
       <br />
       <br />
-      
-      <div>
-            <div className='forcast-heading'>
-                <p>Daily Forcast</p>
-            </div>
-            <hr />
-            <ForcastData/>
-        </div>
+      <ForcastData title={'Daily Forcast'} ForcastData = {forcastWeather.daily} />
     </div>
   )
 }

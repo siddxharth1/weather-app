@@ -29,7 +29,7 @@ const getTime = async (searchParams) => {
     
 
     // return {time_24_format:time.time_24, displayTime }
-    return {time_hour, displayTime }
+    return {time_hour, displayTime, timeSecs : time.date_time_unix}
 }
 
 //-----------------------------------{locationKey, timezone, cityName, CountryName, StateName}---------------------
