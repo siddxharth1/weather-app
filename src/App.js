@@ -29,7 +29,7 @@ function App() {
   return (
     <div className='main'>
       <Navbar />
-      {weather ? <DataBody weatherData={weather}/> : <div style={{color:'white', fontSize:50, margin:'100px 40%'}}> fetching the data</div>}
+      {weather ? <DataBody weatherData={weather}/> : <div style={{color:'white', fontSize:50, margin:'100px 40%'}}> fetching data...</div>}
       
     </div>
   );
