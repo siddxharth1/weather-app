@@ -90,14 +90,13 @@ const getDailyForcastData = async (searchParams, units) => {
                 info: d.Day.IconPhrase,
                 icon: d.Day.Icon,
                 // date: d.Date,
-                day: formatToLocalTime(d.EpochDate, searchParams.Name, 'ccc'),
-                min_min_temp: Math.round(d.Temperature.Minimum.Value)+"°" +"/" + Math.round(d.Temperature.Maximum.Value)+"°"
+                title: formatToLocalTime(d.EpochDate, searchParams.Name, 'ccc'),
+                temp: Math.round(d.Temperature.Minimum.Value)+"°" +"/" + Math.round(d.Temperature.Maximum.Value)+"°"
             }
         })
         return (dailyData)
     }
     let dailyForcastMain = formatDailyForcastData(dailyData);
-    // console.log(dailyForcastMain)
     return dailyForcastMain;
 }
 
@@ -120,7 +119,6 @@ const getHourlyForcastData = async (searchParams, units) => {
                 info: h.IconPhrase
             }
         })
-        
         return (hourlyForcastResponse)
     }
     let hourlyForcastMain = formatHourlyForcastData(hourlyForcastResponse);
@@ -145,7 +143,7 @@ const getFormattedWeatherData = async (searchParams) => {
 
     const date_time = await getTime(locationInfo.Name)
     // console.log(date_time)
-    const finalData = {daily:{...dailyForcastData}, hourly:{...hourlyForcastData}, date_time, locInfo: {...locationInfo}, currentData:{...formattedWeatherData}}
+    const finalData = {daily:[...dailyForcastData], hourly:[...hourlyForcastData], date_time, locInfo: {...locationInfo}, currentData:{...formattedWeatherData}}
     // console.log(finalData)
 
     return finalData;

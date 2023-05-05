@@ -31,10 +31,10 @@ function DataBody({ weatherData }) {
 
 
         <div className='forcast-main'>
-          <ForcastData title={'Hourly Forcast'} ForcastData={weatherData.hourly} />
+          <ForcastData title={'Hourly Forcast'} forcastData={weatherData.hourly} />
           <br />
           <br />
-          <ForcastData title={'Daily Forcast'} ForcastData={weatherData.daily} />
+          <ForcastData title={'Daily Forcast'} forcastData={weatherData.daily} />
         </div>
         {/* <DayWeekForcast forcastWeather={weatherData} /> */}
       </div>
