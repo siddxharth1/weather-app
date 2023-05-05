@@ -23,7 +23,7 @@ function App() {
         setWeather(data)
       })
     }
-    // fetchWeatherData()
+    // fetchWeatherData({ query, units })
   }, [query, units])
 
   return (
