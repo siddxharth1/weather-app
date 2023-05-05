@@ -1,6 +1,6 @@
 import React from 'react'
 import ForcastData from './ForcastData'
-import './DayWeekForcast.css'
+import './css/DayWeekForcast.css'
 
 function DayWeekForcast({forcastWeather}) {
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import './DataBody.css'
+import './css/DataBody.css'
 import Weather from './Weather'
 import DayWeekForcast from './DayWeekForcast'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import './Weather.css'
+import './css/Weather.css'
 import images from './images'
 import { DateTime } from "luxon";
 // import pic from './images/sunny.svg'

@@ -1,5 +1,5 @@
 import React from 'react'
-import './DayWeekForcast.css'
+import './css/DayWeekForcast.css'
 
 function ForcastData() {
   return (
