@@ -20,13 +20,19 @@ function Navbar({setQuery}) {
     const handleSearch=()=>{
         if(city!=='') setQuery({q: city})
     }
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch()
+        }
+      }
 
     return (
         <div className='navbar'>
             <div className='navbar-title'>Weather app</div>
             <div className='navbar-btns'>
                 <div className='search-box'>
-                    <input type="text" className="search-input" name="" id="search" placeholder="Search" value={city} onChange={(e)=>setCity(e.target.value)} />
+                    <input type="text" className="search-input" name="" id="search" placeholder="Search" value={city} onChange={(e)=>setCity(e.target.value)} onKeyDown={handleKeyDown}
+                    />
                     <i className="bi bi-search searchIcon" onClick={handleSearch} />
                 </div>
                 
