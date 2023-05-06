@@ -9,7 +9,7 @@ const API_KEY = "c4be0c8811c9d94722b0f8cb46eb7f4e"
 const Base_URL = "https://api.openweathermap.org/data/2.5"
 
 //accuweatherApi
-const accuWeatherApiKey = 'IivKY50fPmWgbjJ3TdCRgA5ylH1YZlR2';
+const accuWeatherApiKey = '8j7t0np4nHcDaTHN6tXFt4eJc8AWJ2ZT';
 const citySearchBaseURL = 'http://dataservice.accuweather.com/locations/v1/cities/search'; //for city search
 const dailyForcastURL = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/' //daily forcast
 const hourlyForcastURL = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/' //hourly forcast
@@ -151,3 +151,4 @@ const getFormattedWeatherData = async (searchParams) => {
 
 export default getFormattedWeatherData;
 export {getTime}
+export {formatToLocalTime}
