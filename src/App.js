@@ -29,7 +29,7 @@ function App() {
   return (
     <div className='main'>
       <Navbar setQuery={setQuery}/>
-      {weather ? <DataBody weatherData={weather} units={units} setUnits={setUnits} /> : <div style={{color:'white', fontSize:50, margin:'100px 40%'}}> fetching data...</div>}
+      {weather ? <DataBody weatherData={weather} /> : <div style={{color:'white', fontSize:50, margin:'100px 40%'}}> fetching data...</div>}
       
     </div>
   );

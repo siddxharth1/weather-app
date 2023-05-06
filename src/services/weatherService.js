@@ -2,8 +2,7 @@ import { DateTime } from "luxon";
 
 //----------------------------------------------API-------------------------------------------------------------
 //time API
-const timeBaseURL = 'https://api.ipgeolocation.io/timezone'
-const timeAPI = '073d8aa2e34c441fb5de245741b4cf2a'
+const timeUrl = 'http://worldtimeapi.org/api/timezone/'
 
 //openWeatherApi
 const API_KEY = "c4be0c8811c9d94722b0f8cb46eb7f4e"
@@ -21,15 +20,15 @@ const formatToLocalTime = (secs, zone, format)=>DateTime.fromSeconds(secs).setZo
 
 //returning current time date according to timezone(searchParams)(kolkata/india)
 const getTime = async (searchParams) => {
-    const url = new URL(timeBaseURL);
-    url.search = new URLSearchParams({ apiKey: timeAPI, ...searchParams })
+    const url = new URL(timeUrl+searchParams);
     const time = await fetch(url).then((resp) => resp.json());
-    const displayTime = formatToLocalTime(time.date_time_unix, searchParams,"cccc, dd LLL yyyy' |' hh:mm:ss a")
-    const time_hour = formatToLocalTime(time.date_time_unix, searchParams,'HH')
+    // console.log(time)
+    const displayTime = formatToLocalTime(time.unixtime, searchParams,"cccc, dd LLL yyyy' |' hh:mm:ss a")
+    const time_hour = formatToLocalTime(time.unixtime, searchParams,'HH')
     
 
     // return {time_24_format:time.time_24, displayTime }
-    return {time_hour, displayTime, timeSecs : time.date_time_unix}
+    return {time_hour, displayTime, timeSecs : time.unixtime}
 }
 
 //-----------------------------------{locationKey, timezone, cityName, CountryName, StateName}---------------------
@@ -151,3 +150,4 @@ const getFormattedWeatherData = async (searchParams) => {
 
 
 export default getFormattedWeatherData;
+export {getTime}
