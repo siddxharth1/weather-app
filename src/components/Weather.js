@@ -2,11 +2,10 @@ import React from 'react'
 import './css/Weather.css'
 import images from './images'
 import { DateTime } from "luxon";
-import ToggleButton from './ToggleButton';
 // import pic from './images/sunny.svg'
 
- function Weather ({currentWeather}) {
-    const formatToLocalTime = (secs, zone, format)=>DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
+function Weather({ currentWeather }) {
+    const formatToLocalTime = (secs, zone, format) => DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
     const sunriseTime = formatToLocalTime(currentWeather.currentData.sunrise, currentWeather.locInfo.Name, 'hh:mma')
     const sunsetTime = formatToLocalTime(currentWeather.currentData.sunset, currentWeather.locInfo.Name, 'hh:mma')
 
@@ -21,7 +20,12 @@ import ToggleButton from './ToggleButton';
                     </div>
 
                     <div>
-                        <ToggleButton/>
+                        <div className='switches'>
+                            <input type="radio" name="unit" id="celciusUnit" defaultChecked />
+                            <label htmlFor="celciusUnit">°C</label>
+                            <input type="radio" name="unit" id="fernehiteUnit" />
+                            <label htmlFor="fernehiteUnit">°F</label>
+                        </div>
                     </div>
 
                 </div>
@@ -64,11 +68,11 @@ import ToggleButton from './ToggleButton';
                             <div className='circle'></div>
                             <div className='sun-rise-set'>
                                 <div className='rowFlex'>
-                                <i className="bi bi-sunrise"></i> <span>{sunriseTime} </span>
+                                    <i className="bi bi-sunrise"></i> <span>{sunriseTime} </span>
                                 </div>
                                 &nbsp;
                                 <div className='rowFlex endDisplay'>
-                                <i className="bi bi-sunset"></i><span>{sunsetTime} </span>
+                                    <i className="bi bi-sunset"></i><span>{sunsetTime} </span>
                                 </div>
                             </div>
                         </div>
