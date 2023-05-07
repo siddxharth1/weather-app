@@ -4,18 +4,15 @@ import Weather from './Weather'
 import './css/DayWeekForcast.css'
 import ForcastData from './ForcastData'
 import { getTime } from '../services/weatherService'
-// import {formatToLocalTime} from '../services/weatherService'
-import { DateTime } from 'luxon'
+import { formatToLocalTime } from '../services/weatherService'
 
-function DataBody({ weatherData }) {
+function DataBody({ weatherData, units, setUnits }) {
 
   const [time, setTime] = useState()
-  const formatToLocalTime = (secs, zone, format) => DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
-  const timeZone = weatherData.locInfo.Name
 
   const getTimee = async () => {
-    const unixSecs = await getTime(timeZone)
-    let timeee = formatToLocalTime(unixSecs.timeSecs, timeZone, "cccc, dd LLL yyyy' |' hh:mm:ss a")
+    const unixSecs = await getTime(weatherData.locInfo.Name)
+    let timeee = formatToLocalTime(unixSecs.timeSecs, weatherData.locInfo.Name, "cccc, dd LLL yyyy' |' hh:mm:ss a")
     setTime(timeee)
     return timeee
   }
@@ -35,6 +32,23 @@ function DataBody({ weatherData }) {
   }
   const greetingMsg = greetingFn()
 
+  const handleUnitsChange = (e) => {
+    const selectedUnit = e.target.id
+    console.log(selectedUnit)
+    if (units !== selectedUnit) setUnits(selectedUnit)
+  }
+
+  var tempUnit = 'C'
+  var speedUnit ='m/s'
+  if(units==='imperial'){
+    tempUnit = 'F'
+    speedUnit ='mi/h'
+  }
+  else{
+    tempUnit = 'C'
+    speedUnit ='m/s'
+  }
+  var displayUnits ={tempUnit, speedUnit}
 
   return (
     <div className='weather-main'>
@@ -56,25 +70,23 @@ function DataBody({ weatherData }) {
 
               <div>
                 <div className='switches'>
-                  <input type="radio" name="unit" id="celciusUnit" defaultChecked />
-                  <label htmlFor="celciusUnit">°C</label>
-                  <input type="radio" name="unit" id="fernehiteUnit" />
-                  <label htmlFor="fernehiteUnit">°F</label>
+                  <input type="radio" name="unit" id="metric" defaultChecked onChange={handleUnitsChange} />
+                  <label htmlFor="metric">°C</label>
+                  <input type="radio" name="unit" id="imperial" onChange={handleUnitsChange} />
+                  <label htmlFor="imperial">°F</label>
                 </div>
               </div>
             </div>
-            <Weather currentWeather={weatherData} />
+            <Weather currentWeather={weatherData} displayUnit={displayUnits}/>
           </div>
         </div>
 
-        
-
 
         <div className='forcast-main'>
-          <ForcastData title={'Hourly Forcast'} forcastData={weatherData.hourly} />
+          <ForcastData title={'Hourly Forcast'} forcastData={weatherData.hourly} displayUnit={displayUnits}/>
           <br />
           <br />
-          <ForcastData title={'Daily Forcast'} forcastData={weatherData.daily} />
+          <ForcastData title={'Daily Forcast'} forcastData={weatherData.daily} displayUnit={displayUnits}/>
         </div>
       </div>
 
