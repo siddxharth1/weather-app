@@ -4,7 +4,7 @@ import images from './images'
 import { DateTime } from "luxon";
 // import pic from './images/sunny.svg'
 
-function Weather({ currentWeather }) {
+function Weather({ currentWeather, displayUnit }) {
     const formatToLocalTime = (secs, zone, format) => DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
     const sunriseTime = formatToLocalTime(currentWeather.currentData.sunrise, currentWeather.locInfo.Name, 'hh:mma')
     const sunsetTime = formatToLocalTime(currentWeather.currentData.sunset, currentWeather.locInfo.Name, 'hh:mma')
@@ -14,7 +14,7 @@ function Weather({ currentWeather }) {
         <div>
 
             <div className='weather-details'>
-                <div className='temp'>{currentWeather.currentData.currentTemp}&deg;C</div>
+                <div className='temp'>{currentWeather.currentData.currentTemp}&deg;{displayUnit.tempUnit}</div>
                 <div className='info'>
                     {/* <img className='image' src={pic}/> */}
                     {/* <img className='image' src={(require('./images/sunny.svg')).default}/> */}
@@ -26,7 +26,7 @@ function Weather({ currentWeather }) {
                 <div className='more-abt-weather'>
                     <div className='more-info'>
                         <i className="bi bi-thermometer-half"></i>
-                        Real felt:<span>{currentWeather.currentData.real_feel}&deg;C</span>
+                        Real felt:<span>{currentWeather.currentData.real_feel}&deg;{displayUnit.tempUnit}</span>
                     </div>
                     |
                     <div className='more-info'>
@@ -36,7 +36,7 @@ function Weather({ currentWeather }) {
                     |
                     <div className='more-info'>
                         <i className="bi bi-wind"></i>
-                        Wind:<span>{currentWeather.currentData.speed} m/s</span>
+                        Wind:<span>{currentWeather.currentData.speed} {displayUnit.speedUnit} </span>
                     </div>
                 </div>
                 <div className='moreinfo'>
