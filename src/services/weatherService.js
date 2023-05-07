@@ -16,19 +16,19 @@ const hourlyForcastURL = 'http://dataservice.accuweather.com/forecasts/v1/hourly
 
 //---------------------------------Time------------------------------------
 //-------------------------------formatting dates using luxon--------------------------------------
-const formatToLocalTime = (secs, zone, format)=>DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
+const formatToLocalTime = (secs, zone, format) => DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
 
 //returning current time date according to timezone(searchParams)(kolkata/india)
 const getTime = async (searchParams) => {
-    const url = new URL(timeUrl+searchParams);
+    const url = new URL(timeUrl + searchParams);
     const time = await fetch(url).then((resp) => resp.json());
     // console.log(time)
-    const displayTime = formatToLocalTime(time.unixtime, searchParams,"cccc, dd LLL yyyy' |' hh:mm:ss a")
-    const time_hour = formatToLocalTime(time.unixtime, searchParams,'HH')
-    
+    const displayTime = formatToLocalTime(time.unixtime, searchParams, "cccc, dd LLL yyyy' |' hh:mm:ss a")
+    const time_hour = formatToLocalTime(time.unixtime, searchParams, 'HH')
+
 
     // return {time_24_format:time.time_24, displayTime }
-    return {time_hour, displayTime, timeSecs : time.unixtime}
+    return { time_hour, displayTime, timeSecs: time.unixtime }
 }
 
 //-----------------------------------{locationKey, timezone, cityName, CountryName, StateName}---------------------
@@ -43,8 +43,8 @@ const getLocationKey = async (searchParams) => {
     //destructuring key and timezone
     function getIdZone(data) {
         const { Key, TimeZone: { Name }, EnglishName: cityName, AdministrativeArea: { LocalizedName: stateName }, Country: { EnglishName: countryName } } = data
-        const location = cityName +', ' + stateName+ ', ' + countryName
-        return { Key, Name, location}
+        const location = cityName + ', ' + stateName + ', ' + countryName
+        return { Key, Name, location }
     }
     const keyName = getIdZone(cityRequired) //storing Key, timeZone as Name, cityName, countryName, stateName in keyName variable
     return keyName;
@@ -63,7 +63,7 @@ const getWeatherData = (infoType, searchParams) => {
 //formatting(destructuring) all the current data and returning all the required data as an object
 const formatCurrentData = (data) => {
     const {
-        main: {temp, feels_like, temp_min, temp_max, pressure, humidity },
+        main: { temp, feels_like, temp_min, temp_max, pressure, humidity },
         weather,
         wind: { speed },
         sys: { sunrise, sunset },
@@ -79,7 +79,7 @@ const formatCurrentData = (data) => {
 //returning daily forcast data
 const getDailyForcastData = async (searchParams, units) => {
     const dailyForcastDataURL = new URL(dailyForcastURL + searchParams.Key)
-    dailyForcastDataURL.search = new URLSearchParams({ apikey: accuWeatherApiKey, metric: units==='metric'? true : false })
+    dailyForcastDataURL.search = new URLSearchParams({ apikey: accuWeatherApiKey, metric: units === 'metric' ? true : false })
     const forcastResponse = await fetch(dailyForcastDataURL).then((resp) => resp.json())
     let dailyData = forcastResponse.DailyForecasts
 
@@ -90,7 +90,7 @@ const getDailyForcastData = async (searchParams, units) => {
                 icon: d.Day.Icon,
                 // date: d.Date,
                 title: formatToLocalTime(d.EpochDate, searchParams.Name, 'ccc'),
-                temp: Math.round(d.Temperature.Minimum.Value)+"°" +"/" + Math.round(d.Temperature.Maximum.Value)+"°"
+                temp: Math.round(d.Temperature.Minimum.Value) + "°" + "/" + Math.round(d.Temperature.Maximum.Value) + "°"
             }
         })
         return (dailyData)
@@ -102,7 +102,7 @@ const getDailyForcastData = async (searchParams, units) => {
 //returning hourly forcast data
 const getHourlyForcastData = async (searchParams, units) => {
     const hourlyForcastDataURL = new URL(hourlyForcastURL + searchParams.Key)
-    hourlyForcastDataURL.search = new URLSearchParams({ apikey: accuWeatherApiKey, metric: units==='metric'? true : false })
+    hourlyForcastDataURL.search = new URLSearchParams({ apikey: accuWeatherApiKey, metric: units === 'metric' ? true : false })
     let hourlyForcastResponse = await fetch(hourlyForcastDataURL).then((resp) => resp.json())
     // console.log(hourlyForcastResponse);
 
@@ -110,9 +110,9 @@ const getHourlyForcastData = async (searchParams, units) => {
     const formatHourlyForcastData = (hourlyForcastResponse) => {
         hourlyForcastResponse = hourlyForcastResponse.slice(1, 6).map((h) => {
             // console.log(searchParams.Name)
-            
+
             return {
-                temp: Math.round(h.Temperature.Value) +"°",
+                temp: Math.round(h.Temperature.Value) + "°",
                 icon: h.WeatherIcon,
                 title: formatToLocalTime(h.EpochDateTime, searchParams.Name, 'hh:mm a'),
                 info: h.IconPhrase
@@ -142,7 +142,7 @@ const getFormattedWeatherData = async (searchParams) => {
 
     const date_time = await getTime(locationInfo.Name)
     // console.log(date_time)
-    const finalData = {daily:[...dailyForcastData], hourly:[...hourlyForcastData], date_time, locInfo: {...locationInfo}, currentData:{...formattedWeatherData}}
+    const finalData = { daily: [...dailyForcastData], hourly: [...hourlyForcastData], date_time, locInfo: { ...locationInfo }, currentData: { ...formattedWeatherData } }
     // console.log(finalData)
 
     return finalData;
@@ -150,5 +150,5 @@ const getFormattedWeatherData = async (searchParams) => {
 
 
 export default getFormattedWeatherData;
-export {getTime}
-export {formatToLocalTime}
+export { getTime }
+export { formatToLocalTime }
