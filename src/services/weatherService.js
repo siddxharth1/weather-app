@@ -16,6 +16,18 @@ const citySearchBaseURL = 'http://dataservice.accuweather.com/locations/v1/citie
 const dailyForcastURL = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/' //daily forcast
 const hourlyForcastURL = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/' //hourly forcast
 
+//unsplashApi
+const unsplashApi = process.env.REACT_APP_UNSPLASH_APIKey
+const baseUnsplashUrl = 'https://api.unsplash.com/search/photos'
+
+const getBackgroundImg = async (cityName) => {
+    const url = new URL(baseUnsplashUrl)
+    url.search = new URLSearchParams({ client_id: unsplashApi, query: cityName })
+    const imageData =await fetch(url).then((resp) => resp.json());
+    const imageUrl = imageData.results[0].urls.full
+    return(imageUrl)
+}
+
 //---------------------------------Time------------------------------------
 //-------------------------------formatting dates using luxon--------------------------------------
 const formatToLocalTime = (secs, zone, format) => DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
@@ -46,7 +58,7 @@ const getLocationKey = async (searchParams) => {
     function getIdZone(data) {
         const { Key, TimeZone: { Name }, EnglishName: cityName, AdministrativeArea: { LocalizedName: stateName }, Country: { EnglishName: countryName } } = data
         const location = cityName + ', ' + stateName + ', ' + countryName
-        return { Key, Name, location }
+        return { Key, Name, location, cityName }
     }
     const keyName = getIdZone(cityRequired) //storing Key, timeZone as Name, cityName, countryName, stateName in keyName variable
     return keyName;
@@ -135,7 +147,10 @@ const getFormattedWeatherData = async (searchParams) => {
     const formattedWeatherData = await getWeatherData('weather', searchParams).then(data => formatCurrentData(data));
 
     const locationInfo = await getLocationKey(searchParams)
-    // console.log(locationInfo)
+    // console.log(locationInfo.cityName)
+    const backgroundImageUrl= await getBackgroundImg(locationInfo.cityName)
+    // console.log(backgroundImageUrl)
+    
 
     const dailyForcastData = await getDailyForcastData(locationInfo, searchParams.units)
     const hourlyForcastData = await getHourlyForcastData(locationInfo, searchParams.units)
@@ -144,7 +159,7 @@ const getFormattedWeatherData = async (searchParams) => {
 
     const date_time = await getTime(locationInfo.Name)
     // console.log(date_time)
-    const finalData = { daily: [...dailyForcastData], hourly: [...hourlyForcastData], date_time, locInfo: { ...locationInfo }, currentData: { ...formattedWeatherData } }
+    const finalData = { daily: [...dailyForcastData], hourly: [...hourlyForcastData], date_time, locInfo: { ...locationInfo }, currentData: { ...formattedWeatherData }, backgroundImageUrl }
     // console.log(finalData)
 
     return finalData;
