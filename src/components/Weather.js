@@ -2,6 +2,7 @@ import React from 'react'
 import './css/Weather.css'
 import images from './images'
 import { DateTime } from "luxon";
+import ToggleButton from './ToggleButton';
 // import pic from './images/sunny.svg'
 
  function Weather ({currentWeather}) {
@@ -20,7 +21,7 @@ import { DateTime } from "luxon";
                     </div>
 
                     <div>
-                        &deg;C/&deg;F
+                        <ToggleButton/>
                     </div>
 
                 </div>
