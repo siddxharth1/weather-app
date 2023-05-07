@@ -1,19 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './css/Navbar.css'
 
 function Navbar({setQuery}) {
+    let defaultTheme = window.matchMedia("(prefers-color-scheme:dark)").matches
     const setDarkMode=()=>{
         document.querySelector("body").setAttribute('theme', 'dark')
     }
     const setLightMode=()=>{
         document.querySelector("body").setAttribute('theme', 'light')
     }
+    useEffect(()=>{
+        function changeTheme(){
+            defaultTheme ? setDarkMode() :setLightMode()
+        }
+        changeTheme()
+    }, [])
+
     const toggleTheme = (e)=>{
         e.target.checked ? setDarkMode() : setLightMode()
     }
 
-    let defaultTheme = window.matchMedia("(prefers-color-scheme:dark)").matches
-    defaultTheme ? setDarkMode() :setLightMode()
 
 
     const[city, setCity] = useState('')
@@ -36,7 +42,7 @@ function Navbar({setQuery}) {
                     <i className="bi bi-search searchIcon" onClick={handleSearch} />
                 </div>
                 
-                <input type="checkbox" className='dark-mode-btn' name="" id="checkbox" onChange={toggleTheme} defaultChecked={defaultTheme}/>
+                <input type="checkbox" className='dark-mode-btn' name="" id="checkbox" onClick={toggleTheme} defaultChecked={defaultTheme}/>
                 
             </div>
         </div>
