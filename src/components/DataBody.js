@@ -8,6 +8,7 @@ import {getTime} from '../services/weatherService'
 import {DateTime} from 'luxon'
 
 function DataBody({ weatherData }) {
+
   const [time, setTime] =useState()
   const formatToLocalTime = (secs, zone, format)=>DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
   const timeZone = weatherData.locInfo.Name
@@ -34,13 +35,13 @@ function DataBody({ weatherData }) {
   }
   const greetingMsg = greetingFn()
 
+
   return (
     <div className='weather-main'>
       <div className='heading'>
         <div className='greating'>
           {greetingMsg}
         </div>
-        {/* <div className='date-time'> {weatherData.date_time.displayTime}</div> */}
         <div className='date-time'>{time} </div>
       </div>
 
@@ -54,7 +55,6 @@ function DataBody({ weatherData }) {
           <br />
           <ForcastData title={'Daily Forcast'} forcastData={weatherData.daily} />
         </div>
-        {/* <DayWeekForcast forcastWeather={weatherData} /> */}
       </div>
 
     </div>
