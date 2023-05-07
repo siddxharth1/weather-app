@@ -48,7 +48,7 @@
 }
 
 .switches input:checked + label {
-	background-color: #81c6ff;
+	background-color: #448bfd;
     font-weight: 700;
 }
 
