@@ -23,6 +23,8 @@
 .switches {
 	display: flex;
 	overflow: hidden;
+    background-color: #b3b3b3;
+    border-radius: 20px;
 }
 
 .switches input {
@@ -32,14 +34,12 @@
 	overflow: hidden;
 }
 
-
 .switches label {
-	background-color: #ffffff9c;
+	background-color: #b3b3b3;
 	color: rgba(0, 0, 0);
 	font-size: 14px;
 	text-align: center;
-	padding: 3px 10px 4px 8px;
-	border: 1px solid rgba(0, 0, 0, 0.2);
+	padding: 3px 8px 4px 7px;
 	transition: all 0.1s ease-in-out;
 }
 
@@ -53,11 +53,11 @@
 }
 
 .switches label:first-of-type {
-	border-radius: 4px 0 0 4px;
+	border-radius: 24px;
 }
 
 .switches label:last-of-type {
-	border-radius: 0 4px 4px 0;
+	border-radius:24px;
 }
 
 .weather-info{
