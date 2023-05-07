@@ -8,8 +8,8 @@ import { useEffect, useState } from 'react';
 function App() {  
   
   const fetchWeatherData = async()=>{
-    const wdata = await getFormattedWeatherData({q:"surat", units: 'metric' })
-    console.log(wdata)
+    const allDatas = await getFormattedWeatherData({q:"surat", units: 'metric' })
+    console.log(allDatas)
   }
   fetchWeatherData()
 
