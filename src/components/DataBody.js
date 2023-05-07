@@ -3,19 +3,19 @@ import './css/DataBody.css'
 import Weather from './Weather'
 import './css/DayWeekForcast.css'
 import ForcastData from './ForcastData'
-import {getTime} from '../services/weatherService'
+import { getTime } from '../services/weatherService'
 // import {formatToLocalTime} from '../services/weatherService'
-import {DateTime} from 'luxon'
+import { DateTime } from 'luxon'
 
 function DataBody({ weatherData }) {
 
-  const [time, setTime] =useState()
-  const formatToLocalTime = (secs, zone, format)=>DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
+  const [time, setTime] = useState()
+  const formatToLocalTime = (secs, zone, format) => DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
   const timeZone = weatherData.locInfo.Name
 
-  const getTimee = async()=>{
+  const getTimee = async () => {
     const unixSecs = await getTime(timeZone)
-    let timeee = formatToLocalTime(unixSecs.timeSecs, timeZone,"cccc, dd LLL yyyy' |' hh:mm:ss a")
+    let timeee = formatToLocalTime(unixSecs.timeSecs, timeZone, "cccc, dd LLL yyyy' |' hh:mm:ss a")
     setTime(timeee)
     return timeee
   }
@@ -46,7 +46,28 @@ function DataBody({ weatherData }) {
       </div>
 
       <div className='weather-info'>
-        <Weather currentWeather={weatherData} />
+        <div className='main-weather'>
+          <div className='blur'>
+            <div className='loc-unit'>
+              <div className='location'>
+                <i className='bi bi-geo-alt' />
+                <p>{weatherData.locInfo.location}</p>
+              </div>
+
+              <div>
+                <div className='switches'>
+                  <input type="radio" name="unit" id="celciusUnit" defaultChecked />
+                  <label htmlFor="celciusUnit">°C</label>
+                  <input type="radio" name="unit" id="fernehiteUnit" />
+                  <label htmlFor="fernehiteUnit">°F</label>
+                </div>
+              </div>
+            </div>
+            <Weather currentWeather={weatherData} />
+          </div>
+        </div>
+
+        
 
 
         <div className='forcast-main'>
