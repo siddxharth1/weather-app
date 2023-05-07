@@ -5,11 +5,13 @@ import { DateTime } from "luxon";
 const timeUrl = 'http://worldtimeapi.org/api/timezone/'
 
 //openWeatherApi
-const API_KEY = "c4be0c8811c9d94722b0f8cb46eb7f4e"
+// const API_KEY = "c4be0c8811c9d94722b0f8cb46eb7f4e"
+const API_KEY = process.env.REACT_APP_OPENWEATHER_APIKEY
 const Base_URL = "https://api.openweathermap.org/data/2.5"
 
 //accuweatherApi
-const accuWeatherApiKey = '8j7t0np4nHcDaTHN6tXFt4eJc8AWJ2ZT';
+// const accuWeatherApiKey = '8j7t0np4nHcDaTHN6tXFt4eJc8AWJ2ZT';
+const accuWeatherApiKey = process.env.REACT_APP_ACCUWEATHER_APIKey
 const citySearchBaseURL = 'http://dataservice.accuweather.com/locations/v1/cities/search'; //for city search
 const dailyForcastURL = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/' //daily forcast
 const hourlyForcastURL = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/' //hourly forcast
