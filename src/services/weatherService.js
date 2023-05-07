@@ -149,7 +149,7 @@ const getFormattedWeatherData = async (searchParams) => {
     const locationInfo = await getLocationKey(searchParams)
     // console.log(locationInfo.cityName)
     const backgroundImageUrl= await getBackgroundImg(locationInfo.cityName)
-    // console.log(backgroundImageUrl)
+    console.log(backgroundImageUrl)
     
 
     const dailyForcastData = await getDailyForcastData(locationInfo, searchParams.units)
