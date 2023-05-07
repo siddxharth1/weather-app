@@ -19,6 +19,47 @@
     font-size: 24px;
     font-weight: 600;
 }
+
+.switches {
+	display: flex;
+	overflow: hidden;
+}
+
+.switches input {
+	position: absolute !important;
+	height: 0px;
+	width: 0px;
+	overflow: hidden;
+}
+
+
+.switches label {
+	background-color: #ffffff9c;
+	color: rgba(0, 0, 0, 0.6);
+	font-size: 14px;
+	text-align: center;
+	padding: 3px 10px 4px 8px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	transition: all 0.1s ease-in-out;
+}
+
+.switches label:hover {
+	cursor: pointer;
+}
+
+.switches input:checked + label {
+	background-color: #86b5dc;
+    font-weight: 700;
+}
+
+.switches label:first-of-type {
+	border-radius: 4px 0 0 4px;
+}
+
+.switches label:last-of-type {
+	border-radius: 0 4px 4px 0;
+}
+
 .weather-info{
     display: flex;
     flex-wrap: wrap;
