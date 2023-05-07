@@ -21,7 +21,6 @@ function DataBody({ weatherData }) {
   setInterval(() => {
     getTimee()
   }, 800);
-  
 
   const greetingFn = () => {
     let hour = weatherData.date_time.time_hour
