@@ -8,6 +8,7 @@ import { formatToLocalTime } from '../services/weatherService'
 
 function DataBody({ weatherData, units, setUnits }) {
 
+  const backgroungUrl = weatherData.backgroundImageUrl
   const [time, setTime] = useState()
 
   const getTimee = async () => {
@@ -51,7 +52,8 @@ function DataBody({ weatherData, units, setUnits }) {
   var displayUnits ={tempUnit, speedUnit}
 
   return (
-    <div className='weather-main'>
+    <div className='weather-main' style={{backgroundImage : `url(${backgroungUrl})`}}>
+      <div className='blur_layer'>
       <div className='heading'>
         <div className='greating'>
           {greetingMsg}
@@ -60,7 +62,7 @@ function DataBody({ weatherData, units, setUnits }) {
       </div>
 
       <div className='weather-info'>
-        <div className='main-weather'>
+        <div className='main-weather' >
           <div className='blur'>
             <div className='loc-unit'>
               <div className='location'>
@@ -89,7 +91,7 @@ function DataBody({ weatherData, units, setUnits }) {
           <ForcastData title={'Daily Forcast'} forcastData={weatherData.daily} displayUnit={displayUnits}/>
         </div>
       </div>
-
+      </div>
     </div>
   )
 }
