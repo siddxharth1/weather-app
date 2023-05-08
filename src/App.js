@@ -9,7 +9,7 @@ function App() {
   
   const fetchWeatherData = async()=>{
     const allDatas = await getFormattedWeatherData({q:"surat", units: 'metric' })
-    console.log(allDatas)
+    // console.log(allDatas)
   }
   fetchWeatherData()
 
