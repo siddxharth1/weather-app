@@ -35,11 +35,10 @@ const formatToLocalTime = (secs, zone, format) => DateTime.fromSeconds(secs).set
 //returning current time date according to timezone(searchParams)(kolkata/india)
 const getTime = async (searchParams) => {
     const url = new URL(timeUrl + searchParams);
-    const time = await fetch(url).then((resp) => resp.json());
+    const time = await fetch(url).then((resp) => resp.json())
     // console.log(time)
     const displayTime = formatToLocalTime(time.unixtime, searchParams, "cccc, dd LLL yyyy' |' hh:mm:ss a")
     const time_hour = formatToLocalTime(time.unixtime, searchParams, 'HH')
-
 
     // return {time_24_format:time.time_24, displayTime }
     return { time_hour, displayTime, timeSecs: time.unixtime }
@@ -149,7 +148,7 @@ const getFormattedWeatherData = async (searchParams) => {
     const locationInfo = await getLocationKey(searchParams)
     // console.log(locationInfo.cityName)
     const backgroundImageUrl= await getBackgroundImg(locationInfo.cityName)
-    console.log(backgroundImageUrl)
+    // console.log(backgroundImageUrl)
     
 
     const dailyForcastData = await getDailyForcastData(locationInfo, searchParams.units)
