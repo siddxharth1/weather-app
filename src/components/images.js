@@ -1,8 +1,19 @@
 const images = {
     '01d' : require('./images/weather_icons/clear_day.svg').default,
+    '1' : require('./images/weather_icons/clear_day.svg').default,
+
     '01n' : require('./images/weather_icons/clear_night.svg').default,
+
     '02d' : require('./images/weather_icons/few_clouds_day.svg').default,
+    '2' : require('./images/weather_icons/few_clouds_day.svg').default,
+
     '02n' : require('./images/weather_icons/few_clouds_night.svg').default,
+    '3' : require('./images/weather_icons/partially_sunny_day.svg').default,
+    '4' : require('./images/weather_icons/partially_sunny_day.svg').default,
+    '5' : require('./images/weather_icons/hazy_sunshine.svg').default,
+    '6' : require('./images/weather_icons/mostly_cloudy.svg').default,
+    '7' : require('./images/weather_icons/scattered_clouds_day_night.svg').default,
+
     '03d' : require('./images/weather_icons/scattered_clouds_day_night.svg').default,
     '03n' : require('./images/weather_icons/scattered_clouds_day_night.svg').default,
     '04d' : require('./images/weather_icons/broken_clouds_day_night.svg').default,
