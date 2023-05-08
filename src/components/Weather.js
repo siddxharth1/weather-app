@@ -8,17 +8,17 @@ function Weather({ currentWeather, displayUnit }) {
     const formatToLocalTime = (secs, zone, format) => DateTime.fromSeconds(secs).setZone(zone).toFormat(format)
     const sunriseTime = formatToLocalTime(currentWeather.currentData.sunrise, currentWeather.locInfo.Name, 'hh:mma')
     const sunsetTime = formatToLocalTime(currentWeather.currentData.sunset, currentWeather.locInfo.Name, 'hh:mma')
-
+    // console.log(currentWeather.currentData.icon)
+    const imageCode = currentWeather.currentData.icon
     return (
 
         <div>
-
             <div className='weather-details'>
                 <div className='temp'>{currentWeather.currentData.currentTemp}&deg;{displayUnit.tempUnit}</div>
                 <div className='info'>
                     {/* <img className='image' src={pic}/> */}
                     {/* <img className='image' src={(require('./images/sunny.svg')).default}/> */}
-                    <img className='image' src={images.sunny} alt='img' />
+                    <img className='image' src={images[imageCode]} alt='img' />
                     <p className='about'>{currentWeather.currentData.weatherDesc}</p>
                 </div>
             </div>
