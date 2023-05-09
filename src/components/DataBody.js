@@ -35,7 +35,7 @@ function DataBody({ weatherData, units, setUnits }) {
 
   const handleUnitsChange = (e) => {
     const selectedUnit = e.target.id
-    console.log(selectedUnit)
+    // console.log(selectedUnit)
     if (units !== selectedUnit) setUnits(selectedUnit)
   }
 
