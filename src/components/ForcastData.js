@@ -3,7 +3,7 @@ import './css/DayWeekForcast.css'
 import images from './images'
 
 function ForcastData({ title, forcastData, displayUnit}) {
-    const imageCode = forcastData;
+    // const imageCode = forcastData;
     // console.log(imageCode)
     return (
         <div>
