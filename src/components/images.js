@@ -39,7 +39,27 @@ const images = {
     '17' : require('./images/weather_icons/partially_cloudy_w_tStorms.svg').default,
     '18' : require('./images/weather_icons/rain.svg').default,
     '19' : require('./images/weather_icons/flurries.svg').default,
-    
+    '20' : require('./images/weather_icons/mostly_cloudy_w_flurries.svg').default,
+    '21' : require('./images/weather_icons/partially_sunny_w_flurries.svg').default,
+    '22' : require('./images/weather_icons/snow_day_night.svg').default,
+    '23' : require('./images/weather_icons/mostly_cloudy_w_flurries.svg').default,
+    '24' : require('./images/weather_icons/ice.svg').default,
+
+
+    '32' : require('./images/weather_icons/windy.svg').default,
+    '33' : require('./images/weather_icons/clear_night.svg').default,
+    '34' : require('./images/weather_icons/mostly_clear_night.svg').default,
+    '35' : require('./images/weather_icons/cloudy_night.svg').default,
+    '36' : require('./images/weather_icons/intermittent_clouds_night.svg').default,
+    '37' : require('./images/weather_icons/hazy_moonlight.svg').default,
+    '38' : require('./images/weather_icons/intermittent_clouds_night.svg').default,
+    '39' : require('./images/weather_icons/partially_sunny_w_showers_night.svg').default,
+    '40' : require('./images/weather_icons/mostly_cloudy_w_shower_night.svg').default,
+    '41' : require('./images/weather_icons/partially_cloudy_w_tStroms_night.svg').default,
+    '42' : require('./images/weather_icons/mostly_cloudy_w_tStorm_night.svg').default,
+    '43' : require('./images/weather_icons/mostly_cloudy_w_flurries_night.svg').default,
+    '44' : require('./images/weather_icons/mostly_cloudy_w_snow.svg').default,
+
     '13d' : require('./images/weather_icons/snow_day_night.svg').default,
     '13n' : require('./images/weather_icons/snow_day_night.svg').default,
     '50d' : require('./images/weather_icons/mist_day_night.svg').default,
