@@ -9,7 +9,7 @@ function Weather({ currentWeather, displayUnit }) {
     const sunriseTime = formatToLocalTime(currentWeather.currentData.sunrise, currentWeather.locInfo.Name, 'hh:mma')
     const sunsetTime = formatToLocalTime(currentWeather.currentData.sunset, currentWeather.locInfo.Name, 'hh:mma')
     // console.log(currentWeather.currentData.icon)
-    const imageCode = currentWeather.currentData.icon
+    const imageCode = currentWeather.currentData.currentIcon
     return (
 
         <div>
