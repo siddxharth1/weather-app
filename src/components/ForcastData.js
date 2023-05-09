@@ -1,7 +1,10 @@
 import React from 'react'
 import './css/DayWeekForcast.css'
+import images from './images'
 
 function ForcastData({ title, forcastData, displayUnit}) {
+    const imageCode = forcastData;
+    // console.log(imageCode)
     return (
         <div>
             <div className='forcast-heading'>
@@ -15,7 +18,7 @@ function ForcastData({ title, forcastData, displayUnit}) {
                     forcastData.map((item, i) => (
                         <div className='hourly-forcast' key={i}>
                             <p>{item.title} </p>
-                            <img className='forcast-image' src={(require('./images/sunny.svg')).default} alt='' />
+                            <img className='forcast-image' src={images[item.icon]} alt='' />
                             <p>{item.temp}{displayUnit.tempUnit} </p>
                         </div>
                     ))

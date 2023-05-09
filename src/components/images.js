@@ -48,6 +48,8 @@ const images = {
 
     '26' : require('./images/weather_icons/rain_and_snow.svg').default,
     '29' : require('./images/weather_icons/rain_and_snow.svg').default,
+    '30' : require('./images/weather_icons/hot.svg').default,
+    '31' : require('./images/weather_icons/cold.svg').default,
 
 
     '32' : require('./images/weather_icons/windy.svg').default,
