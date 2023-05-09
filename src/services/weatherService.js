@@ -15,6 +15,7 @@ const accuWeatherApiKey = process.env.REACT_APP_ACCUWEATHER_APIKey
 const citySearchBaseURL = 'http://dataservice.accuweather.com/locations/v1/cities/search'; //for city search
 const dailyForcastURL = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/' //daily forcast
 const hourlyForcastURL = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/' //hourly forcast
+const currentURL = 'http://dataservice.accuweather.com/currentconditions/v1/'
 
 //unsplashApi
 const unsplashApi = process.env.REACT_APP_UNSPLASH_APIKey
@@ -65,6 +66,14 @@ const getLocationKey = async (searchParams) => {
 
 
 //----------------------------weather data--------------------------------------------
+
+// current weather icon using accuweather 
+const getWeatherIcon = async(locKey)=>{
+    const url2 = new URL(currentURL+locKey)
+    url2.search = new URLSearchParams({ apikey: accuWeatherApiKey })
+    const icon = await fetch(url2).then((resp)=>resp.json())
+    return(icon[0].WeatherIcon)
+}
 
 //returning all the current weather data openWeatherAPI
 const getWeatherData = (infoType, searchParams) => {
@@ -147,6 +156,7 @@ const getFormattedWeatherData = async (searchParams) => {
 
     const locationInfo = await getLocationKey(searchParams)
     // console.log(locationInfo.cityName)
+    const currentIcon = await getWeatherIcon(locationInfo.Key);
     const backgroundImageUrl= await getBackgroundImg(locationInfo.cityName)
     // console.log(backgroundImageUrl)
     
@@ -158,7 +168,7 @@ const getFormattedWeatherData = async (searchParams) => {
 
     const date_time = await getTime(locationInfo.Name)
     // console.log(date_time)
-    const finalData = { daily: [...dailyForcastData], hourly: [...hourlyForcastData], date_time, locInfo: { ...locationInfo }, currentData: { ...formattedWeatherData }, backgroundImageUrl }
+    const finalData = { daily: [...dailyForcastData], hourly: [...hourlyForcastData], date_time, locInfo: { ...locationInfo }, currentData: { ...formattedWeatherData , currentIcon}, backgroundImageUrl }
     // console.log(finalData)
 
     return finalData;
