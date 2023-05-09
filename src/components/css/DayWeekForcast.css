@@ -18,11 +18,36 @@
 }
 .hourly-forcast-main{
     display: flex;
+    /* width: 300px; */
     justify-content: space-evenly;
+    overflow: auto;
+    white-space: nowrap;
 }
 .hourly-forcast{
     text-align: center;
+
 }
 .forcast-image{
     height: 40px;
+}
+
+@media only screen and (max-width: 420px) {
+    .hourly-forcast-main{
+        width: 255px;
+        justify-content:unset;
+    }
+    .hourly-forcast{
+        margin: 0 10px 0 5px;
+        text-align: center;
+    }
+}
+@media (min-width: 420px) and (max-width: 500px) {
+    .hourly-forcast-main{
+        width: 280px;
+        justify-content:unset;
+    }
+    .hourly-forcast{
+        margin: 0 10px 0 5px;
+        text-align: center;
+    }
 }
