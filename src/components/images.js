@@ -44,7 +44,9 @@ const images = {
     '22' : require('./images/weather_icons/snow_day_night.svg').default,
     '23' : require('./images/weather_icons/mostly_cloudy_w_flurries.svg').default,
     '24' : require('./images/weather_icons/ice.svg').default,
-    
+    '25' : require('./images/weather_icons/sleet.svg').default,
+
+    '26' : require('./images/weather_icons/rain_and_snow.svg').default,
     '29' : require('./images/weather_icons/rain_and_snow.svg').default,
 
 
