@@ -103,7 +103,7 @@ p {
 }
 .endDisplay{
     display: flex;
-    align-items: end;
+    align-items: flex-end;
 }
 .sunrise-set{
     margin: 10px auto;
