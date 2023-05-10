@@ -18,7 +18,7 @@ function ForcastData({ title, forcastData, displayUnit}) {
                     forcastData.map((item, i) => (
                         <div className='hourly-forcast' key={i}>
                             <p>{item.title} </p>
-                            <img className='forcast-image' src={images[item.icon]} alt='' />
+                            <img className='forcast-image' src={images[item.icon]} alt='' title={item.info} />
                             <p>{item.temp}{displayUnit.tempUnit} </p>
                         </div>
                     ))
