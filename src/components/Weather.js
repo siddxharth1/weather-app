@@ -9,7 +9,7 @@ function Weather({ currentWeather, displayUnit }) {
     const sunriseTime = formatToLocalTime(currentWeather.currentData.sunrise, currentWeather.locInfo.Name, 'hh:mma')
     const sunsetTime = formatToLocalTime(currentWeather.currentData.sunset, currentWeather.locInfo.Name, 'hh:mma')
     // console.log(currentWeather.currentData.icon)
-    const imageCode = currentWeather.currentData.currentIcon
+    const imageCode = currentWeather.currentData.iconId
     return (
 
         <div>
@@ -18,8 +18,8 @@ function Weather({ currentWeather, displayUnit }) {
                 <div className='info'>
                     {/* <img className='image' src={pic}/> */}
                     {/* <img className='image' src={(require('./images/sunny.svg')).default}/> */}
-                    <img className='image' src={images[imageCode]} alt='img' />
-                    <p className='about'>{currentWeather.currentData.weatherDesc}</p>
+                    <img className='image' src={images[imageCode]} alt='img' title={currentWeather.currentData.iconDesc} />
+                    <p className='about'>{currentWeather.currentData.iconDesc}</p>
                 </div>
             </div>
             <div>
