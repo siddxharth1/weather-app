@@ -71,8 +71,11 @@ const getLocationKey = async (searchParams) => {
 const getWeatherIcon = async(locKey)=>{
     const url2 = new URL(currentURL+locKey)
     url2.search = new URLSearchParams({ apikey: accuWeatherApiKey })
-    const icon = await fetch(url2).then((resp)=>resp.json())
-    return(icon[0].WeatherIcon)
+    const iconData = await fetch(url2).then((resp)=>resp.json())
+    // console.log(iconData[0])
+    const icon = iconData[0].WeatherIcon
+    const iconDesc = iconData[0].WeatherText
+    return({icon, iconDesc})
 }
 
 //returning all the current weather data openWeatherAPI
@@ -85,7 +88,7 @@ const getWeatherData = (infoType, searchParams) => {
 //formatting(destructuring) all the current data and returning all the required data as an object
 const formatCurrentData = (data) => {
     const {
-        main: { temp, feels_like, temp_min, temp_max, pressure, humidity },
+        main: { temp, feels_like, temp_min, temp_max, humidity },
         weather,
         wind: { speed },
         sys: { sunrise, sunset },
@@ -94,7 +97,7 @@ const formatCurrentData = (data) => {
 
     const { main: weatherDesc, icon } = weather[0]
 
-    return { currentTemp: Math.round(temp), real_feel: Math.round(feels_like), min_temp: Math.round(temp_min), max_temp: Math.round(temp_max), pressure, humidity, speed, sunrise, sunset, cod, weatherDesc, icon }
+    return { currentTemp: Math.round(temp), real_feel: Math.round(feels_like), min_temp: Math.round(temp_min), max_temp: Math.round(temp_max), humidity, speed, sunrise, sunset, cod, weatherDesc, icon }
 }
 
 
@@ -112,7 +115,7 @@ const getDailyForcastData = async (searchParams, units) => {
                 icon: d.Day.Icon,
                 // date: d.Date,
                 title: formatToLocalTime(d.EpochDate, searchParams.Name, 'ccc'),
-                temp: Math.round(d.Temperature.Minimum.Value) + "°" + "/" + Math.round(d.Temperature.Maximum.Value) + "°"
+                temp: Math.round(d.Temperature.Minimum.Value) + "°/" + Math.round(d.Temperature.Maximum.Value) + "°"
             }
         })
         return (dailyData)
@@ -168,7 +171,8 @@ const getFormattedWeatherData = async (searchParams) => {
 
     const date_time = await getTime(locationInfo.Name)
     // console.log(date_time)
-    const finalData = { daily: [...dailyForcastData], hourly: [...hourlyForcastData], date_time, locInfo: { ...locationInfo }, currentData: { ...formattedWeatherData , currentIcon}, backgroundImageUrl }
+
+    const finalData = { daily: [...dailyForcastData], hourly: [...hourlyForcastData], date_time, locInfo: { ...locationInfo }, currentData: { ...formattedWeatherData , iconId: currentIcon.icon, iconDesc: currentIcon.iconDesc}, backgroundImageUrl }
     // console.log(finalData)
 
     return finalData;
