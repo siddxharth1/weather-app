@@ -17,9 +17,9 @@ function DataBody({ weatherData, units, setUnits }) {
     setTime(timeee)
     return timeee
   }
-  // setInterval(() => {
-  //   getTimee()
-  // }, 900);
+  setInterval(() => {
+    getTimee()
+  }, 900);
   
     getTimee()
   const greetingFn = () => {
