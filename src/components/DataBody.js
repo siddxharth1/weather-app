@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './css/DataBody.css'
 import Weather from './Weather'
 import './css/DayWeekForcast.css'
@@ -11,17 +11,26 @@ function DataBody({ weatherData, units, setUnits }) {
   const backgroungUrl = weatherData.backgroundImageUrl
   const [time, setTime] = useState()
 
-  const getTimee = async () => {
-    const unixSecs = await getTime(weatherData.locInfo.Name)
-    let timeee = formatToLocalTime(unixSecs.timeSecs, weatherData.locInfo.Name, "cccc, dd LLL yyyy' |' hh:mm:ss a")
-    setTime(timeee)  
-    return timeee
-  }
-  setInterval(() => {
+  useEffect(() => {
+    const getTimee = async () => {
+      const unixSecs = await getTime(weatherData.locInfo.Name)
+      let timeee = formatToLocalTime(unixSecs.timeSecs, weatherData.locInfo.Name, "cccc, dd LLL yyyy' |' hh:mm:ss a")
+      setTime(timeee)  
+      return timeee
+    }
     getTimee()
-  }, 900);
+    timeInc();
+  },[] )
   
-    getTimee()
+  const timeInc = async()=>{   
+    let seconds =  weatherData.date_time.timeSecs;
+    setInterval(() => {
+      seconds = seconds+1
+      let timee = formatToLocalTime(seconds, weatherData.locInfo.Name, "cccc, dd LLL yyyy' |' hh:mm:ss a")
+      setTime(timee)
+    }, 1000);
+  }
+  
   const greetingFn = () => {
     let hour = weatherData.date_time.time_hour
     if (hour >= 5 && hour < 12) {
