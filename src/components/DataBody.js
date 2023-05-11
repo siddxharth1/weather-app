@@ -14,7 +14,7 @@ function DataBody({ weatherData, units, setUnits }) {
   const getTimee = async () => {
     const unixSecs = await getTime(weatherData.locInfo.Name)
     let timeee = formatToLocalTime(unixSecs.timeSecs, weatherData.locInfo.Name, "cccc, dd LLL yyyy' |' hh:mm:ss a")
-    // setTime(timeee)  
+    setTime(timeee)  
     return timeee
   }
   setInterval(() => {
