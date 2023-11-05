@@ -34,11 +34,11 @@ function DataBody({ weatherData, units, setUnits }) {
   const greetingFn = () => {
     let hour = weatherData.date_time.time_hour
     if (hour >= 5 && hour < 12) {
-      return ('Good morning');
+      return ('Good Morning');
     } else if (hour >= 12 && hour < 18) {
-      return ('Good afternoon');
+      return ('Good Afternoon');
     } else {
-      return ('Good evening');
+      return ('Good Evening');
     }
   }
   const greetingMsg = greetingFn()
@@ -61,6 +61,8 @@ function DataBody({ weatherData, units, setUnits }) {
   }
   var displayUnits ={tempUnit, speedUnit}
 
+  
+
   return (
     <div className='weather-main' style={{backgroundImage : `url(${backgroungUrl})`}}>
       <div className='blur_layer'>
@@ -76,7 +78,7 @@ function DataBody({ weatherData, units, setUnits }) {
           <div className='blur'>
             <div className='loc-unit'>
               <div className='location'>
-                <i className='bi bi-geo-alt' />
+                <i className='bi bi-geo-alt'/>
                 <p>{weatherData.locInfo.location}</p>
               </div>
 

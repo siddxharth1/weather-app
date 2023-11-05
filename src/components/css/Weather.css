@@ -1,5 +1,5 @@
 .main-weather {
-    background: rgba(255, 255, 255, 0.053);
+    background: rgba(0, 0, 0, 0.1);
     /* background-image: url('./images/backgound.webp'); */
     background-size:cover;
     background-repeat: no-repeat;
@@ -112,3 +112,18 @@ p {
     display: flex;
     justify-content: space-between;   
 }
+
+@media only screen and (max-width: 500px) {
+    .image{
+        height: 130px;
+    }
+    .temp{
+        font-size: 40px;
+    }
+    .about{
+        font-size: 18px;
+    }
+    .blur{
+        padding: 10px;
+    }
+  }
